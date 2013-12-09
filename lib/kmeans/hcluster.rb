@@ -37,6 +37,27 @@ module Kmeans
       return @out
     end
 
+    def clust_to_hash(clust, labels, return_array = false)
+      return [nil, nil] if clust.nil? 
+
+      l = labels[clust.id] || clust.id
+      r = {}
+
+      left = ReporterClassifier.clust_to_hash(clust.left, labels, true)
+      right = ReporterClassifier.clust_to_hash(clust.right, labels, true)
+
+      if left[1] || right[1]
+        r[left[0]] = left[1]
+        r[right[0]] = right[1]
+      elsif left[0] || right[0]
+        r = [left[0], right[0]]
+      else
+        r = nil
+      end
+
+      return_array ? [l, r] : { l => r }
+    end
+
     def hcluster(rows)
       distances = Hash.new
       currentclustid = -1
