@@ -3,6 +3,11 @@ Kmeans Cluster
 
 **K-means clustering**
 
+This Fork
+----------
+
+Added clust_to_hash function to hcluster.rb
+
 
 What is K-means?
 ----------------
